@@ -1,10 +1,31 @@
 # Router
 This is a simple router written in PHP
 
+#### Functions / Methods
+```
+add($method, $path, callback|string)
+```
+Adds a path to the router
+```
+addGet($path, callback|string)
+```
+Shorter version of add('GET', ...)
+```
+addBefore($method, $path, callback|string)
+```
+All before routes are processed first
+```
+addBeforeGet($path, callable|string)
+```
+Same as before, with 'GET' as default method
+```
+Router::buildURL($path)
+```
+BUild a printable URL for hrefs. For example: Router::buildURL('login') could return "/mysubdir/login"
 
 The constructor needs the path to the controllers
 ```
-$router = new Router(CONTROLLER);
+$router = new Router(CONTROLLERS);
 ```
 #### Matches /
 The add() functions don't need the leading '/' for the route
@@ -27,25 +48,24 @@ $router->addBefore('GET', '/admin/(.*)', function() use ($router) {
     }
 });
 ```
-### /admin/deleteUser/1673 --> Delete user 1673!
+#### /admin/deleteUser/1673 --> Delete user 1673!
 ```
 $router->addGet('admin/deleteUser/(\d+)', function($id) { echo "Delete user $id!"; });
 ```
-### /admin/renameUser/7/Swen=Test --> Rename user 7 from Test to Swen!
+#### /admin/renameUser/7/Swen=Test --> Rename user 7 from Test to Swen!
 ```
 $router->add('GET', 'admin/renameUser/(\d+)/(\w+)=(\w+)', function($id, $to, $from) { echo "Rename user $id from $from to $to!"; });
 ```
-### Matches /login | /logout, calls CONTROLLERS.user->login() or logout()
+#### Matches /login | /logout, calls CONTROLLER.user->login() or logout()
 ```
 $router->add('GET', '/login', 'user@login');
 $router->addGet('logout', 'user@logout');
-$router->add('POST', '/loggedin', 'user@loggedin');
 ```
-### Guess
+#### Guess
 ```
 $router->add404(function() { exit('404!'); });
 ```
-### REST Test
+#### REST Test
 ```
 $router->add('POST', 'api/showAllUsers', function() {
     # Fake authentification
@@ -65,7 +85,7 @@ $router->add('POST', 'api/showAllUsers', function() {
     }
 });
 ```
-### Send all data back to the client
+#### Send all data back to the client
 ```
 $router->add('POST', 'api/sendback', function() {
     header("Access-Control-Allow-Origin: *");
@@ -83,7 +103,8 @@ $router->add('POST', 'api/sendback', function() {
     ));
 });
 ```
-### Start the router
+#### Start the router
+Finally you can start the router. It returns the amount of processed routes.
 ```
 $numroutes = $router->start();
 ```
