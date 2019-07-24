@@ -2,21 +2,21 @@
 This is a simple router written in PHP
 
 
-The constructor need the path to the controllers
+The constructor needs the path to the controllers
 ```
 $router = new Router(CONTROLLER);
 ```
-### Matches /
+#### Matches /
 The add() functions don't need the leading '/' for the route
 ```
 $router->addGet('', function() { echo 'Homepage!'; });
 ```
-### /test gives 2 routes
+#### /test gives 2 routes
 ```
 $router->addGet('test', function() { echo 'Test, first definition!<br>'; });
 $router->addGet('test', function() { echo 'Test, second definition!<br>'; });
 ```
-### Matches /admin/... before all other /admin; e.g. to test authentification
+#### Matches /admin/... before all other /admin; e.g. to test authentification
 ```
 $router->addBefore('GET', '/admin/(.*)', function() use ($router) { 
     if (!empty($_SESSION['user_level']) && $_SESSION['user_level'] >= 2) {
