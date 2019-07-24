@@ -1,7 +1,7 @@
 # Router
 This is a simple router written in PHP
 
-#### Functions / Methods
+## Functions / Methods
 ```
 add($method, $path, callback|string)
 ```
@@ -27,6 +27,7 @@ The constructor needs the path to the controllers
 ```
 $router = new Router(CONTROLLERS);
 ```
+## Examples
 #### Matches /
 The add() functions don't need the leading '/' for the route
 ```
