@@ -12,7 +12,7 @@ defined('VIEWS') or define('VIEWS', ROOT . 'app' . DIRECTORY_SEPARATOR . 'views'
 # Set constant CONTROLLERS
 defined('CONTROLLERS') or define('CONTROLLERS', ROOT . 'app' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR);
 
-require ROOT . 'app/inc/Router.php';
+require 'Router.php';
 
 $router = new Router(CONTROLLER);
 
