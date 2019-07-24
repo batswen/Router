@@ -1,12 +1,20 @@
 # Router
 
+The constructor need the path to the controllers
+```
 $router = new Router(CONTROLLER);
-# Matches /
+```
+### Matches /
+```
 $router->addGet('', function() { echo 'Homepage!'; });
-# /test gives 2 routes
+```
+### /test gives 2 routes
+```
 $router->addGet('test', function() { echo 'Test, first definition!<br>'; });
 $router->addGet('test', function() { echo 'Test, second definition!<br>'; });
-# Matches /admin/... before 
+```
+### Matches /admin/... before 
+```
 $router->addBefore('GET', '/admin/(.*)', function() use ($router) { 
     if (!empty($_SESSION['user_level']) && $_SESSION['user_level'] >= 2) {
         # Logged in as admin
@@ -15,17 +23,27 @@ $router->addBefore('GET', '/admin/(.*)', function() use ($router) {
         exit();
     }
 });
-# /admin/deleteUser/1673 --> Delete user 1673!
+```
+### /admin/deleteUser/1673 --> Delete user 1673!
+```
 $router->addGet('admin/deleteUser/(\d+)', function($id) { echo "Delete user $id!"; });
-# /admin/renameUser/7/Swen=Test --> Rename user 7 from Test to Swen!
+```
+### /admin/renameUser/7/Swen=Test --> Rename user 7 from Test to Swen!
+```
 $router->add('GET', 'admin/renameUser/(\d+)/(\w+)=(\w+)', function($id, $to, $from) { echo "Rename user $id from $from to $to!"; });
-# Matches /login | /logout, calls CONTROLLERS.user->login() or logout()
+```
+### Matches /login | /logout, calls CONTROLLERS.user->login() or logout()
+```
 $router->add('GET', '/login', 'user@login');
 $router->addGet('logout', 'user@logout');
 $router->add('POST', '/loggedin', 'user@loggedin');
-# Guess
+```
+### Guess
+```
 $router->add404(function() { exit('404!'); });
-# REST Test
+```
+### REST Test
+```
 $router->add('POST', 'api/showAllUsers', function() {
     # Fake authentification
     $auth = !empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']);
@@ -43,7 +61,9 @@ $router->add('POST', 'api/showAllUsers', function() {
         exit();
     }
 });
-# Send all data back to the client
+```
+### Send all data back to the client
+```
 $router->add('POST', 'api/sendback', function() {
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json; charset=UTF-8");
@@ -59,8 +79,8 @@ $router->add('POST', 'api/sendback', function() {
         ])
     ));
 });
-# Start the router
+```
+### Start the router
+```
 $numroutes = $router->start();
-if ($numroutes > 1) {
-    echo "Number of routes: $numroutes";
-}
+```
