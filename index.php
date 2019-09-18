@@ -14,7 +14,7 @@ defined('CONTROLLERS') or define('CONTROLLERS', ROOT . 'app' . DIRECTORY_SEPARAT
 
 require 'Router.php';
 
-$router = new Router(CONTROLLER);
+$router = new Router(CONTROLLERS);
 
 # Matches /
 $router->addGet('', function() { echo 'Homepage!'; });
