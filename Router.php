@@ -124,7 +124,7 @@ class Router {
         $request_method = $_SERVER['REQUEST_METHOD'];
         $query = $_SERVER['QUERY_STRING'];
         
-        $uri = str_replace(self::getBaseDir(), '', $request_uri);
+        $uri = substr($request_uri, 1);
 
         $found = 0;
         if (!empty($this->beforeroutes)) {
