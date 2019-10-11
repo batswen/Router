@@ -162,7 +162,7 @@ class Router {
                         $splitted = preg_split('/@/', substr($fn, strrpos($fn, '\\')));
                         $path = substr($fn, 0, strrpos($fn, '\\'));
                         $controller = $splitted[0];
-                        $method = $splitted[1];
+                        $method = $splitted[1] ?? '';
 
                         $filename = $this->controllerpath . $path . $controller . '.php';
                         if (file_exists($filename)) {
