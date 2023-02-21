@@ -38,7 +38,7 @@ $router->addGet('', function() { echo 'Homepage!'; });
 $router->addGet('test', function() { echo 'Test, first definition!<br>'; });
 $router->addGet('test', function() { echo 'Test, second definition!<br>'; });
 ```
-#### Matches /admin/... before all other /admin; e.g. to test authentification
+#### Matches /admin/... before all other /admin; e.g. to test authentication
 ```
 $router->addBefore('GET', '/admin/(.*)', function() use ($router) { 
     if (!empty($_SESSION['user_level']) && $_SESSION['user_level'] >= 2) {
@@ -69,7 +69,7 @@ $router->add404(function() { exit('404!'); });
 #### REST Test
 ```
 $router->add('POST', 'api/showAllUsers', function() {
-    # Fake authentification
+    # Fake authentication
     $auth = !empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW']);
     if ($auth) {
         header("Access-Control-Allow-Origin: *");
