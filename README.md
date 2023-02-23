@@ -29,7 +29,7 @@ $router = new Router(CONTROLLERS);
 ```
 ## Examples
 #### Matches /
-The add() functions don't need the leading '/' for the route
+The add() functions doesn't need the leading '/' for the route
 ```
 $router->addGet('', function() { echo 'Homepage!'; });
 ```
